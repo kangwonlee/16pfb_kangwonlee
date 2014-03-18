@@ -12,4 +12,5 @@ f.close()
 # txt 에서 찾는
 found = re.findall(".+@dev.naver.com/.+", txt)
 
-
+for item in found:
+    print item
