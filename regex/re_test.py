@@ -1,16 +1,91 @@
 # -*- coding: cp949 -*-
 import re
-# regular expression
+import os
 
-f = open("140318pfa.txt", 'r')
-txt = f.read()
-f.close()
+git_string = "D:/Progra~1/Git/bin/git.exe"
 
-# done reading file
+def git(cmd):
+    '''
+    execute git command & print
+    >>> git("status") # == git status
+    '''
+    f = os.popen(git_string + ' ' + cmd)
+    print f.read()
+    f.close()
+    del f
+    
+def get_git_naver_anon(proj_id):
+    '''
+    argument : proj_id : project id
+    return : git repository address using the project id
+    
+    >>> get_git_naver_anon("aaa")
+    https://nobody:nobody@dev.naver.com/git/aaa.git
+    '''
+    return "https://nobody:nobody@dev.naver.com/git/%s.git" % proj_id
 
-# '@dev.naver.com/' 와 같은 문자열을 포함하고 앞뒤로 다른 글자가 있는 모든 행을
-# txt 에서 찾는
-found = re.findall(".+@dev.naver.com/git/(.+).git", txt)
+def read_txt(fname):
+    f = open(fname, 'r')
+    txt = f.read()
+    f.close()
+    del f
+    return txt
 
-for item in found:
-    print item
+def clone_naver_to(proj_id, path = ""):
+    '''
+    git clone project (to a path if given)
+    >>> clone_naver_to ("aaa", 'a')
+    '''
+    full_anon_path_naver = get_git_naver_anon(proj_id)
+    cmd = "clone %s %s" % (full_anon_path_naver, path)
+    git(cmd)
+    
+def clone_naver_under_data(proj_id):
+    '''
+    git clone given project under data/[project id] 
+    '''
+    path = os.path.join("data", proj_id)
+    clone_naver_to(proj_id, path)
+
+def paths_under_data():
+    '''
+    return all subfolders under data/ folder
+    '''
+    raw = os.listdir("data")
+    result_list = filter(lambda path_item: os.path.isdir(path_item), raw)
+    del raw
+    return result_list
+
+def pull_path(repository_path):
+    '''
+    cd to repository_path
+    git pull
+    return to original path
+    '''
+    curdir_full_path = os.path.abspath(os.curdir)
+    
+    os.chdir(repository_path)
+    git("pull --all")
+    os.chdir(curdir_full_path)
+    del curdir_full_path
+    
+
+if "__main__" == __name__:
+    # read file
+    txt = read_txt("140318PFA.txt")
+    
+    # regular expression 을 이용하여 관심 문자열을 찾음
+    found = re.findall("https://.+[/,](.+).git", txt)
+    print "len(found) =", len(found)
+    while found:
+        proj_id = found.pop()
+        duplicate = proj_id in found
+        print get_git_naver_anon(proj_id).ljust(8*8), 
+        print "[ duplicate =", duplicate, ']'
+        
+        if (not duplicate):
+            path_under_data = os.path.join("data", proj_id)
+            if (not os.path.exists(path_under_data)) :
+                clone_naver_under_data(proj_id)
+            else:
+                pull_path(path_under_data)
