@@ -2,7 +2,7 @@
 import re
 import os
 
-git_string = "D:/Progra~1/Git/bin/git.exe"
+git_string = r'"D:\Program Files (x86)\Git\bin\git.exe"'
 
 def git(cmd):
     '''
