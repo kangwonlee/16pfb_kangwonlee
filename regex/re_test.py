@@ -79,13 +79,21 @@ if "__main__" == __name__:
     print "len(found) =", len(found)
     while found:
         proj_id = found.pop()
+        
+        # check if project duplicated
         duplicate = proj_id in found
+        # indicate whether project duplicated
         print get_git_naver_anon(proj_id).ljust(8*8), 
         print "[ duplicate =", duplicate, ']'
         
-        if (not duplicate):
-            path_under_data = os.path.join("data", proj_id)
-            if (not os.path.exists(path_under_data)) :
-                clone_naver_under_data(proj_id)
-            else:
-                pull_path(path_under_data)
+        # if duplicated, move to the next project id
+        if (duplicate):
+            continue
+        
+        # get project path
+        path_under_data = os.path.join("data", proj_id)
+        # if project path already exists
+        if (not os.path.exists(path_under_data)) :
+            clone_naver_under_data(proj_id)
+        else:
+            pull_path(path_under_data)
