@@ -2,7 +2,34 @@
 import re
 import os
 
+
+def proc_proj_list(found):
+    '''
+    process project list
+    if duplicate, don't do anything
+    if path does not exist, clone
+    if path exists, pull
+    '''
+    while found:
+        proj_id = found.pop()
+        # check if project duplicated
+        duplicate = proj_id in found
+        # indicate whether project duplicated
+        print get_git_naver_anon(proj_id).ljust(8 * 8)
+        print "[ duplicate =", duplicate, ']'
+        # if duplicated, move to the next project id
+        if (not duplicate):
+            # get project path
+            path_under_data = os.path.join("data", proj_id)
+            # if project path already exists
+            if (not os.path.exists(path_under_data)):
+                clone_naver_under_data(proj_id)
+            else:
+                pull_path(path_under_data)
+
 git_string = "D:/Progra~1/Git/bin/git.exe"
+
+# https://dev.naver.com/projects/14cpfakangwon/download/9335?filename=140325PFA.zip
 
 def git(cmd):
     '''
@@ -77,23 +104,4 @@ if "__main__" == __name__:
     # regular expression 을 이용하여 관심 문자열을 찾음
     found = re.findall("https://.+[/,](.+).git", txt)
     print "len(found) =", len(found)
-    while found:
-        proj_id = found.pop()
-        
-        # check if project duplicated
-        duplicate = proj_id in found
-        # indicate whether project duplicated
-        print get_git_naver_anon(proj_id).ljust(8*8), 
-        print "[ duplicate =", duplicate, ']'
-        
-        # if duplicated, move to the next project id
-        if (duplicate):
-            continue
-        
-        # get project path
-        path_under_data = os.path.join("data", proj_id)
-        # if project path already exists
-        if (not os.path.exists(path_under_data)) :
-            clone_naver_under_data(proj_id)
-        else:
-            pull_path(path_under_data)
+    proc_proj_list(found)
