@@ -39,11 +39,14 @@ def proc_name(arg, dirpath, name):
         msg = ret.git(git_cmd_string, bVerbose=False)
         print "len(msg) =", len(msg)
         print msg
+        
+        time_list = proc_msg(msg)
+        
         key = dirpath, name
         if not arg.has_key(key):
-            arg[key] = [msg]
+            arg[key] = [time_list]
         else:
-            arg[key].append(msg)
+            arg[key].append(time_list)
 
 def visit_path(arg, dirpath, namelist):
     if ".git" not in dirpath:
@@ -91,11 +94,5 @@ if "__main__" == __name__:
 
     os.chdir(original_path)
     
-    pprint.pprint (student_dict.keys())
     pprint.pprint (student_dict)
 
-    print proc_msg('''commit fc8fb8e9b3a5174303d3733e1646d53a3dc5f638
-Author: naverdev <naverdev@naver.com>
-Date:   Tue Mar 4 06:58:15 2014 +0000
-
-    initialized Git repository    ''')
