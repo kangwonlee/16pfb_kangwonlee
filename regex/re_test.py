@@ -1,6 +1,8 @@
 # -*- coding: cp949 -*-
 import re
 import os
+import urllib
+import urlparse
 
 git_string = r'"D:\Program Files (x86)\Git\bin\git.exe"'
 def proc_proj_list(found):
@@ -28,6 +30,34 @@ def proc_proj_list(found):
                 pull_path(path_under_data)
 
 # https://dev.naver.com/projects/14cpfakangwon/download/9335?filename=140325PFA.zip
+def download_n_sync(proj_id):
+    '''
+    read project download page
+    http://dev.naver.com/projects/[proj id]/download
+    
+    find file name (using re)
+    
+    download zip file to a specified path
+    https://dev.naver.com/projects/[proj id]/download/9335?filename=[file name]
+    
+    unzip under an appropriate path
+    
+    setup as remote repository
+    
+    merge with repository
+    '''
+    
+    download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
+    
+    # download page string sample
+    '''
+    
+    '''
+    
+    filename = get_filename(download_page_url)
+    
+    filename = "140325PFA.zip"
+    file_path = "https://dev.naver.com/projects/%s/download/9335?filename=%s" %(proj_id, filename)
 
 def git(cmd):
     '''
