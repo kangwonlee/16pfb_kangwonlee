@@ -8,8 +8,16 @@ import urlparse
 import zipfile  # Martelli, Python in a Nutsell 2nd ed, p. 235, 2006.
 
 git_string = r'"D:\Program Files (x86)\Git\bin\git.exe"'
-
 repository_local_path = "data"
+txt_fname = "repo_list.txt" 
+
+
+def get_proj_id_list(txt_fname):
+    txt = read_txt(txt_fname)
+    # regular expression 을 이용하여 관심 문자열을 찾음
+    found = re.findall("https://.+[/,](.+).git", txt)
+    return found
+
 
 def proc_proj_list(found):
     '''
@@ -95,6 +103,18 @@ def get_local_repo_path(proj_id):
     return os.path.join(repository_local_path, proj_id)
 
 
+def cd_proj_repo(proj_id):
+    '''
+    change directory to project repository
+    '''
+    # store original path
+    original_path = os.path.abspath(os.curdir)
+    # change path to project repository
+    repo_path = get_local_repo_path(proj_id)
+    os.chdir(repo_path)
+    return original_path
+
+
 def git_sync_temp(proj_id, dest_path):
     '''
     change path to project repository
@@ -107,12 +127,9 @@ def git_sync_temp(proj_id, dest_path):
     
     ref: http://stackoverflow.com/questions/1683531/how-to-import-existing-git-repository-into-another
     '''
-    # store original path
-    original_path = os.path.abspath(os.curdir)
     
-    # change path to project repository
-    repo_path = get_local_repo_path(proj_id)
-    os.chdir(repo_path)
+    # change directory to project repository
+    original_path = cd_proj_repo(proj_id)
     
     dest_path_list = os.listdir(dest_path)
     other_repo_path = os.path.join(dest_path, dest_path_list[0])
@@ -295,10 +312,7 @@ def pull_path(repository_path):
 
 if "__main__" == __name__:
     # read file
-    txt = read_txt("140318PFA.txt")
-    
-    # regular expression 을 이용하여 관심 문자열을 찾음
-    found = re.findall("https://.+[/,](.+).git", txt)
+    found = get_proj_id_list(txt_fname)
     print "len(found) =", len(found)
     proc_proj_list(found)
 
