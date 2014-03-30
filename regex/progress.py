@@ -82,17 +82,10 @@ if "__main__" == __name__:
                 # average commit interval
     '''
     
-    proj_id = found[4]
-
-    # change directory to project repository    
-    original_path = ret.cd_proj_repo(proj_id)
-    
     # initialize student directory
     student_dict = {}
 
     os.path.walk(os.curdir, visit_path, student_dict)
 
-    os.chdir(original_path)
-    
     pprint.pprint (student_dict)
 
