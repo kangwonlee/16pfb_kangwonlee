@@ -61,9 +61,9 @@ def download_n_sync(proj_id):
     download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
 
     # url to zip file
-    file_path = get_intermediate_url(download_page_url)
-    print "download_n_sync() : file_path =", file_path
-    num_zip_list = re.findall(r"download/(.*)\?filename=(.*)", file_path)
+    intermediate_zip_url = get_intermediate_url(download_page_url)
+    print "download_n_sync() : intermediate_zip_url =", intermediate_zip_url
+    num_zip_list = re.findall(r"download/(.*)\?filename=(.*)", intermediate_zip_url)
     
     number, zip_fname = num_zip_list[0] 
     
