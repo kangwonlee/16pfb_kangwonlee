@@ -297,7 +297,7 @@ if "__main__" == __name__:
     # read file
     txt = read_txt("140318PFA.txt")
     
-    # regular expression �� �̿��Ͽ� ��� ���ڿ��� ã��
+    # regular expression 을 이용하여 관심 문자열을 찾음
     found = re.findall("https://.+[/,](.+).git", txt)
     print "len(found) =", len(found)
     proc_proj_list(found)
