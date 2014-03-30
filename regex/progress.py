@@ -21,13 +21,16 @@ def proc_msg(msg):
     pattern_string_1 = "commit.+Author:.+Date:\s+(.*?)$.*"
     lines = msg.split('\n')
     
+    result = []
+    
     for line in lines:
         if "Date:" == line.strip()[:5]:
             date_string = line[5:-5].strip()
 
-            print date_string
-            print time.strptime(date_string)
-    
+            #print date_string
+            result.append( time.strptime(date_string) )
+            #print result[-1]
+    return tuple(result)
 
 def proc_name(arg, dirpath, name):
     if os.path.isfile(name):
@@ -91,7 +94,7 @@ if "__main__" == __name__:
     pprint.pprint (student_dict.keys())
     pprint.pprint (student_dict)
 
-    proc_msg('''commit fc8fb8e9b3a5174303d3733e1646d53a3dc5f638
+    print proc_msg('''commit fc8fb8e9b3a5174303d3733e1646d53a3dc5f638
 Author: naverdev <naverdev@naver.com>
 Date:   Tue Mar 4 06:58:15 2014 +0000
 
