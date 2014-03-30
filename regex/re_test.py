@@ -1,4 +1,4 @@
-# -*- coding: cp949 -*-
+# -*- coding: utf-8 -*-
 import re
 import os
 import urllib
@@ -69,10 +69,22 @@ def get_filename(url):
     f.close()
     del f
     print "get_filename() : len(txt) =", len(txt)
+    
+    # find all tables
     items = re.findall("<table.*?>(.*?)</table>", txt, re.S)
+    
+    # tables loop
+    for table_item in items:
+        # if this table contains .zip string
+        if ".zip" in table_item:
+            # find all rows
+            table_rows = re.findall("<tr.*?>(.*?)</tr>", table_item, re.S)
+            for table_row in table_rows:
+                print "get_filename() : table_row = %s" % (table_row)
+
     print "get_filename() : len(items) =", len(items)
     print ".zip" in items[0]
-    return items[0]
+    return "not done yet"
 
 def git(cmd):
     '''
@@ -144,7 +156,7 @@ if "__main__" == __name__:
     # read file
     txt = read_txt("140318PFA.txt")
     
-    # regular expression À» ÀÌ¿ëÇÏ¿© °ü½É ¹®ÀÚ¿­À» Ã£À½
+    # regular expression ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
     found = re.findall("https://.+[/,](.+).git", txt)
     print "len(found) =", len(found)
     #proc_proj_list(found)
