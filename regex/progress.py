@@ -33,12 +33,12 @@ def proc_msg(msg):
     return tuple(result)
 
 def proc_name(arg, dirpath, name):
-    if os.path.isfile(name):
+    if os.path.isfile(name) and "README" != name:
         git_cmd_string = '''log %s''' % name
-        print git_cmd_string
+        #print git_cmd_string
         msg = ret.git(git_cmd_string, bVerbose=False)
-        print "len(msg) =", len(msg)
-        print msg
+        #print "len(msg) =", len(msg)
+        #print msg
         
         time_list = proc_msg(msg)
         
@@ -54,9 +54,9 @@ def visit_path(arg, dirpath, namelist):
         d_path = os.path.abspath(dirpath)
         os.chdir(d_path)
         
-        print '-'*80
-        print os.path.abspath(os.curdir)
-        print '-'*80
+        #print '-'*80
+        #print os.path.abspath(os.curdir)
+        #print '-'*80
         
         for name in namelist:
             proc_name(arg, dirpath, name)
