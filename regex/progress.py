@@ -41,7 +41,9 @@ def proc_time_list(time_list):
     return n
 
 def proc_name(arg, dirpath, name):
-    if os.path.isfile(name) and "README" != name:
+    if os.path.isfile(name) \
+    and (name not in ("README"))\
+    :
         git_cmd_string = '''log %s''' % name
         #print git_cmd_string
         msg = ret.git(git_cmd_string, bVerbose=False)
@@ -72,7 +74,16 @@ def visit_path(arg, dirpath, namelist):
             proc_name(arg, dirpath, name)
 
         os.chdir(org_path)
-            
+
+def build_table(dict):
+    '''
+    '''
+    
+    field_set = set()
+    for path, fname in dict.iterkeys():
+        field_set.add(fname)
+    print field_set
+                
 
 if "__main__" == __name__:
     # read file
@@ -95,7 +106,9 @@ if "__main__" == __name__:
     # initialize student directory
     student_dict = {}
 
-    os.path.walk(os.curdir, visit_path, student_dict)
+    os.path.walk(ret.repository_local_path, visit_path, student_dict)
 
     pprint.pprint (student_dict)
+    
+    print build_table(student_dict)
 
