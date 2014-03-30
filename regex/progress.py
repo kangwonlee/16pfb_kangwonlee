@@ -20,7 +20,8 @@ def proc_msg(msg):
     lines = msg.split('\n')
     
     for i in xrange(2, len(lines), 3):
-        print lines[i].strip()
+        date_string = lines[i][5:].strip()
+        print date_string
     
 
 def proc_name(arg, dirpath, name):
