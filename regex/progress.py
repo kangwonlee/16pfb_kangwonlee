@@ -75,18 +75,33 @@ def visit_path(arg, dirpath, namelist):
 
         os.chdir(org_path)
 
+
+def build_field_list(dict):
+    field_set = set()
+    for path, fname in dict.iterkeys():
+        field_set.add(fname)
+    
+    field_list = list(field_set)
+    field_list.sort()
+    return field_list
+
 def build_table(dict):
     '''
     '''
     
-    field_set = set()
-    for path, fname in dict.iterkeys():
-        field_set.add(fname)
-    field_list = list(field_set)
-    field_list.sort()
+    field_list = build_field_list(dict)
     
-    print field_list 
-                
+    print field_list
+    
+    nFields = len(field_list)
+    
+     
+
+    csv_fname = "progress.csv"
+    
+    #f = open(csv_fname, 'w')
+
+    #f.close()
 
 if "__main__" == __name__:
     # read file
