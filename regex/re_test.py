@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
 import os
+import pprint
 import urllib
 import urlparse
 
@@ -53,6 +54,23 @@ def download_n_sync(proj_id):
     
     file_path = "https://dev.naver.com/projects/%s/download/9335?filename=%s" %(proj_id, filename)
     
+def parse_table(html_txt):
+    '''
+    content of a 2D table -> tuple of tuple
+    '''
+    
+    # initialize table
+    table_list = []
+    
+    # find all rows
+    table_rows = re.findall("<tr.*?>(.*?)</tr>", html_txt, re.S)
+    
+    for table_row in table_rows:
+        row_columns = re.findall("<t[dh].*?>(.*?)</t[dh]>", table_row, re.S)
+        table_list.append(tuple(row_columns))
+        
+    return tuple(table_list)
+
 def get_filename(url):
     '''
     get .zip filename from the download page of the project
@@ -78,12 +96,23 @@ def get_filename(url):
         # if this table contains .zip string
         if ".zip" in table_item:
             # find all rows
-            table_rows = re.findall("<tr.*?>(.*?)</tr>", table_item, re.S)
-            for table_row in table_rows:
-                print "get_filename() : table_row = %s" % (table_row)
+            table_tuple = parse_table(table_item)
+            pprint.pprint(table_tuple)
+            
+    # sample table
+    '''
+    (('\xeb\xa6\xb4\xeb\xa6\xac\xec\xa6\x88 \xec\x9d\xb4\xeb\xa6\x84',
+      '\xed\x8c\x8c\xec\x9d\xbc\xeb\xaa\x85',
+      '\xed\x81\xac\xea\xb8\xb0',
+      '\xeb\x8b\xa4\xec\x9a\xb4\xed\x9a\x8c\xec\x88\x98',
+      '\xeb\x82\xa0\xec\xa7\x9c'),
+     ('<a href="/projects/14cpfakangwon/download/note/5919" title="140325">140325</a>',
+      '<a href="/projects/14cpfakangwon/download/9335?filename=140325PFA.zip" rel="nofollow" title="140325PFA.zip">140325PFA.zip</a>',
+      '71 KB',
+      '1',
+      '2014-03-25'))
+    '''    
 
-    print "get_filename() : len(items) =", len(items)
-    print ".zip" in items[0]
     return "not done yet"
 
 def git(cmd):
