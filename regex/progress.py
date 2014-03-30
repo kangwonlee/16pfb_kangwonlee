@@ -4,6 +4,7 @@ import os
 import pprint
 import re
 import re_test as ret
+import time
 
 def proc_msg(msg):
     '''
@@ -21,8 +22,11 @@ def proc_msg(msg):
     lines = msg.split('\n')
     
     for i in xrange(2, len(lines), 3):
-        date_string = lines[i][5:].strip()
-        print date_string
+        print "i =", i
+        date_string = lines[i][5:-5].strip()
+        if len(date_string) > 10:
+            print date_string
+            print time.strptime(date_string)
     
 
 def proc_name(arg, dirpath, name):
@@ -91,5 +95,4 @@ if "__main__" == __name__:
 Author: naverdev <naverdev@naver.com>
 Date:   Tue Mar 4 06:58:15 2014 +0000
 
-    initialized Git repository    
-''')
+    initialized Git repository    ''')
