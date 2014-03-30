@@ -79,6 +79,13 @@ def unpack_zip_file(dest_path, dest_path_fname):
     z.close()
     os.remove(dest_path_fname)
 
+
+def git_sync_temp(proj_id, dest_path):
+    # remote command string
+    remote_string = "remote add other %s" % (dest_path)
+    print "download_n_sync() :", remote_string
+    git(remote_string)
+
 def download_n_sync(proj_id):
     '''
     read project download page
@@ -104,11 +111,7 @@ def download_n_sync(proj_id):
 
     unpack_zip_file(dest_path, dest_path_fname)
     
-    # remote command string
-    remote_string = "remote add other %s" % (dest_path)
-    print "download_n_sync() :", remote_string
-    
-    git(remote_string)
+    git_sync_temp(proj_id, dest_path)
     # os.rmdir(dest_path)
 
 def parse_table(html_txt):
@@ -256,5 +259,9 @@ if "__main__" == __name__:
     found = re.findall("https://.+[/,](.+).git", txt)
     print "len(found) =", len(found)
     #proc_proj_list(found)
-    url_zip = download_n_sync(r"14cpfakangwon")
-    print url_zip
+    
+    # to test git_sync_temp()
+    proj_id = "14cpfassangshow"
+    dest_path = r"c:\users\farak\appdata\local\temp\tmpxfau2b"
+    download_n_sync(proj_id)
+    #git_sync_temp(proj_id, dest_path)
