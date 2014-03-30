@@ -75,13 +75,15 @@ def download_n_sync(proj_id):
     #download file
     print "download_n_sync() : retriving %s to %s" % (zip_url, dest_path_fname)
     urllib.urlretrieve(zip_url, dest_path_fname)
-    
-    # Martelli, Python in a Nutsell 2nd ed, p. 235, 2006.
-    # create a zip file object
-    z = zipfile.ZipFile(dest_path_fname)
-    zipped_items = z.namelist()
-    pprint.pprint (zipped_items)
+
+    # extract zip file content    
+    # http://stackoverflow.com/questions/9431918/extracting-zip-file-contents-to-specific-directory-in-python-2-7
+    z = zipfile.ZipFile(dest_path_fname, 'r')
+    z.extractall(dest_path)
+    z.close()
     # os.rmdir(dest_path)
+    
+    
         
 def parse_table(html_txt):
     '''
