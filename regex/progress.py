@@ -44,6 +44,10 @@ def proc_name(arg, dirpath, name):
     if os.path.isfile(name) \
     and (name not in ("README"))\
     :
+        proj_id = dirpath.split(os.sep)[1]
+        arg["fields"].add(name)
+        
+        
         git_cmd_string = '''log %s''' % name
         #print git_cmd_string
         msg = ret.git(git_cmd_string, bVerbose=False)
@@ -54,11 +58,16 @@ def proc_name(arg, dirpath, name):
         
         evaluation = proc_time_list(time_list)
         
-        key = dirpath, name
-        if not arg.has_key(key):
-            arg[key] = [evaluation]
+        key1 = proj_id
+        key2 = name
+        #print "key =", key
+        if not arg.has_key(key1):
+            arg[key1] = {key2: [evaluation]}
         else:
-            arg[key].append(evaluation)
+            if not arg[key1].has_key(key2):
+                arg[key1][key2] = [evaluation]
+            else:
+                arg[key1][key2].append(evaluation)
 
 def visit_path(arg, dirpath, namelist):
     if ".git" not in dirpath:
@@ -77,11 +86,7 @@ def visit_path(arg, dirpath, namelist):
 
 
 def build_field_list(dict):
-    field_set = set()
-    for path, fname in dict.iterkeys():
-        field_set.add(fname)
-    
-    field_list = list(field_set)
+    field_list = list(dict['fields'])
     field_list.sort()
     return field_list
 
@@ -122,7 +127,8 @@ if "__main__" == __name__:
     '''
     
     # initialize student directory
-    student_dict = {}
+    student_dict = {"fields":set(),
+                    "proj_id":set()}
 
     os.path.walk(ret.repository_local_path, visit_path, student_dict)
 
