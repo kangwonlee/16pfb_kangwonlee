@@ -21,10 +21,10 @@ def proc_msg(msg):
     pattern_string_1 = "commit.+Author:.+Date:\s+(.*?)$.*"
     lines = msg.split('\n')
     
-    for i in xrange(2, len(lines), 3):
-        print "i =", i
-        date_string = lines[i][5:-5].strip()
-        if len(date_string) > 10:
+    for line in lines:
+        if "Date:" == line.strip()[:5]:
+            date_string = line[5:-5].strip()
+
             print date_string
             print time.strptime(date_string)
     
