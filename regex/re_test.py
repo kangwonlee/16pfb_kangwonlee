@@ -28,10 +28,10 @@ def proc_proj_list(found):
         # if duplicated, move to the next project id
         if (not duplicate):
             # get project path
-            path_under_data = os.path.join(repository_local_path, proj_id)
+            path_under_data = get_local_repo_path(proj_id)
             # if project path already exists
             if (not os.path.exists(path_under_data)):
-                clone_naver_under_data(proj_id)
+                clone_naver_to(proj_id, path_under_data)
             else:
                 pull_path(path_under_data)
 
@@ -80,11 +80,37 @@ def unpack_zip_file(dest_path, dest_path_fname):
     os.remove(dest_path_fname)
 
 
+def get_local_repo_path(proj_id):
+    '''
+    get path to local repository for given project id
+    '''
+    return os.path.join(repository_local_path, proj_id)
+
+
 def git_sync_temp(proj_id, dest_path):
+    '''
+    change path to project repository
+    
+    configure dest_path as other remote repository
+    
+    execute pull from the other remote repository
+    
+    change back to the original path
+    
+    ref: http://stackoverflow.com/questions/1683531/how-to-import-existing-git-repository-into-another
+    '''
+    # store original path
+    original_path = os.path.abspath(os.curdir)
+    
+    repo_path = get_local_repo_path(proj_id) 
+    
     # remote command string
     remote_string = "remote add other %s" % (dest_path)
     print "download_n_sync() :", remote_string
     git(remote_string)
+
+    # change back to original path
+    os.chdir(original_path)
 
 def download_n_sync(proj_id):
     '''
@@ -221,13 +247,6 @@ def clone_naver_to(proj_id, path = ""):
     cmd = "clone %s %s" % (full_anon_path_naver, path)
     git(cmd)
     
-def clone_naver_under_data(proj_id):
-    '''
-    git clone given project under data/[project id] 
-    '''
-    path = os.path.join(repository_local_path, proj_id)
-    clone_naver_to(proj_id, path)
-
 def paths_under_data():
     '''
     return all subfolders under data/ folder
@@ -263,5 +282,5 @@ if "__main__" == __name__:
     # to test git_sync_temp()
     proj_id = "14cpfassangshow"
     dest_path = r"c:\users\farak\appdata\local\temp\tmpxfau2b"
-    download_n_sync(proj_id)
-    #git_sync_temp(proj_id, dest_path)
+    #download_n_sync(proj_id)
+    git_sync_temp(proj_id, dest_path)
