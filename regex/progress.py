@@ -6,7 +6,14 @@ import re_test as ret
 
 def handle_path(arg, dirpath, namelist):
     if ".git" not in dirpath:
+        org_path = os.path.abspath(os.curdir)
+        d_path = os.path.abspath(dirpath)
+        os.chdir(d_path)
+        
         print dirpath
+        
+        os.chdir(org_path)
+            
 
 if "__main__" == __name__:
     # read file
