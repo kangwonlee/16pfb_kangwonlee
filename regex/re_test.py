@@ -59,18 +59,21 @@ def download_n_sync(proj_id):
     # url to zip file
     file_path = get_zip_url(download_page_url)
     print "download_n_sync() : file_path =", file_path
-    numeric_list = re.findall(r"download/(.*)\?filename=", file_path)
-    zip_file_name_list = re.findall(r"download/[0-9]*?\?filename=(.*)", file_path)
-    print "download_n_sync() : numeric =", numeric_list
-    print "download_n_sync() : zip_file_name =", zip_file_name_list
+    num_zip_list = re.findall(r"download/(.*)\?filename=(.*)", file_path)
+    
+    number, zip_fname = num_zip_list[0] 
+    
+    print "download_n_sync() : num_zip_list =", num_zip_list
+    print "download_n_sync() : numeric =", number
+    print "download_n_sync() : zip_file_name =", zip_fname
 
     # make temporary path
     # Martelli, Python in a Nutsell 2nd ed, p. 223, 2006.
     dest_path = tempfile.mkdtemp()
     print "download_n_sync() : dest_path =", dest_path
-    dest_path_fname = os.path.join(dest_path, zip_file_name_list[0])
+    dest_path_fname = os.path.join(dest_path, zip_fname)
     
-    zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (numeric_list[0], zip_file_name_list[0])
+    zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (number, zip_fname)
     
     #download file
     print "download_n_sync() : retriving %s to %s" % (zip_url, dest_path_fname)
