@@ -38,12 +38,12 @@ def proc_proj_list(found):
 # https://dev.naver.com/projects/14cpfakangwon/download/9335?filename=140325PFA.zip
 
 def get_zip_url(intermediate_zip_url):
-    print "download_n_sync() : intermediate_zip_url =", intermediate_zip_url
+    print "get_zip_url() : intermediate_zip_url =", intermediate_zip_url
     num_zip_list = re.findall(r"download/(.*)\?filename=(.*)", intermediate_zip_url)
     number, zip_fname = num_zip_list[0]
-    print "download_n_sync() : num_zip_list =", num_zip_list
-    print "download_n_sync() : numeric =", number
-    print "download_n_sync() : zip_file_name =", zip_fname
+    print "get_zip_url() : num_zip_list =", num_zip_list
+    print "get_zip_url() : numeric =", number
+    print "get_zip_url() : zip_file_name =", zip_fname
     zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (number, zip_fname)
     return zip_fname, zip_url
 
@@ -60,7 +60,7 @@ def download_zipfile(proj_id, dest_path):
     # destination path for the zip file
     dest_path_fname = os.path.join(dest_path, zip_fname)
     #download file
-    print "download_n_sync() : retriving %s to %s" % (zip_url, dest_path_fname)
+    print "download_zipfile() : retriving %s to %s" % (zip_url, dest_path_fname)
     urllib.urlretrieve(zip_url, dest_path_fname)
     return dest_path_fname
 
@@ -101,8 +101,11 @@ def download_n_sync(proj_id):
 
     unpack_zip_file(dest_path, dest_path_fname)
     
-    print dest_path
+    # remote command string
+    remote_string = "remote add other %s" % (dest_path)
+    print "download_n_sync() :", remote_string
     
+    git(remote_string)
     # os.rmdir(dest_path)
 
 def parse_table(html_txt):
