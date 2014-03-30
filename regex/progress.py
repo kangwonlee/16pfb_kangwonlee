@@ -82,7 +82,10 @@ def build_table(dict):
     field_set = set()
     for path, fname in dict.iterkeys():
         field_set.add(fname)
-    print field_set
+    field_list = list(field_set)
+    field_list.sort()
+    
+    print field_list 
                 
 
 if "__main__" == __name__:
