@@ -69,7 +69,10 @@ def get_filename(url):
     f.close()
     del f
     print "get_filename() : len(txt) =", len(txt)
-    return re.findall("<table.*?>(.*?)</table>", txt, re.S)
+    items = re.findall("<table.*?>(.*?)</table>", txt, re.S)
+    print "get_filename() : len(items) =", len(items)
+    print ".zip" in items[0]
+    return items[0]
 
 def git(cmd):
     '''
@@ -145,7 +148,5 @@ if "__main__" == __name__:
     found = re.findall("https://.+[/,](.+).git", txt)
     print "len(found) =", len(found)
     #proc_proj_list(found)
-    items = get_filename(r"http://dev.naver.com/projects/14cpfakangwon/download")
-    for item in items:
-        print item
-        print ".zip" in item
+    url_zip = get_filename(r"http://dev.naver.com/projects/14cpfakangwon/download")
+    print url_zip
