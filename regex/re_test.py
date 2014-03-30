@@ -50,10 +50,10 @@ def download_n_sync(proj_id):
     
     download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
 
-    filename = get_filename(download_page_url)
-    
-    file_path = "https://dev.naver.com/projects/%s/download/9335?filename=%s" %(proj_id, filename)
-    
+    file_path = get_zip_url(download_page_url)
+    print file_path
+    print re.findall("/.*?\?filename=(.*)", file_path)
+        
 def parse_table(html_txt):
     '''
     content of a 2D table -> tuple of tuple
@@ -71,7 +71,7 @@ def parse_table(html_txt):
         
     return tuple(table_list)
 
-def get_filename(url):
+def get_zip_url(url):
     '''
     get .zip filename from the download page of the project
     '''
@@ -86,7 +86,7 @@ def get_filename(url):
     txt = f.read()
     f.close()
     del f
-    print "get_filename() : len(txt) =", len(txt)
+    print "get_zip_url() : len(txt) =", len(txt)
     
     # find all tables
     items = re.findall("<table.*?>(.*?)</table>", txt, re.S)
@@ -199,5 +199,5 @@ if "__main__" == __name__:
     found = re.findall("https://.+[/,](.+).git", txt)
     print "len(found) =", len(found)
     #proc_proj_list(found)
-    url_zip = get_filename(r"http://dev.naver.com/projects/14cpfakangwon/download")
+    url_zip = download_n_sync(r"14cpfakangwon")
     print url_zip
