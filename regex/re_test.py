@@ -251,15 +251,17 @@ def get_intermediate_url(url):
         print "*"*40
     return zip_file_url
 
-def git(cmd):
+def git(cmd, bVerbose = True):
     '''
     execute git command & print
     >>> git("status") # == git status
     '''
     f = os.popen(git_string + ' ' + cmd)
-    print f.read()
+    msg = f.read()
+    if bVerbose : print msg
     f.close()
     del f
+    return msg
     
 def get_git_naver_anon(proj_id):
     '''
