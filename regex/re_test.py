@@ -34,6 +34,7 @@ def proc_proj_list(found):
                 clone_naver_to(proj_id, path_under_data)
             else:
                 pull_path(path_under_data)
+            download_n_sync(proj_id)
 
 # https://dev.naver.com/projects/14cpfakangwon/download/9335?filename=140325PFA.zip
 
@@ -59,12 +60,17 @@ def download_zipfile(proj_id, dest_path):
     download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
     # url to zip file
     intermediate_zip_url = get_intermediate_url(download_page_url)
-    zip_fname, zip_url = get_zip_url(intermediate_zip_url)
-    # destination path for the zip file
-    dest_path_fname = os.path.join(dest_path, zip_fname)
-    #download file
-    if bVerbose: print "download_zipfile() : retriving %s to %s" % (zip_url, dest_path_fname)
-    urllib.urlretrieve(zip_url, dest_path_fname)
+    
+    dest_path_fname = ""
+    
+    if intermediate_zip_url:
+    
+        zip_fname, zip_url = get_zip_url(intermediate_zip_url)
+        # destination path for the zip file
+        dest_path_fname = os.path.join(dest_path, zip_fname)
+        #download file
+        if bVerbose: print "download_zipfile() : retriving %s to %s" % (zip_url, dest_path_fname)
+        urllib.urlretrieve(zip_url, dest_path_fname)
     return dest_path_fname
 
 
@@ -144,10 +150,12 @@ def download_n_sync(proj_id):
     print "download_n_sync() : dest_path =", dest_path
     
     dest_path_fname = download_zipfile(proj_id, dest_path)
-
-    unpack_zip_file(dest_path, dest_path_fname)
     
-    git_sync_temp(proj_id, dest_path)
+    if dest_path_fname:
+
+        unpack_zip_file(dest_path, dest_path_fname)
+        
+        git_sync_temp(proj_id, dest_path)
     # os.rmdir(dest_path)
 
 def parse_table(html_txt):
@@ -187,7 +195,7 @@ def get_intermediate_url(url):
     # find all tables
     items = re.findall("<table.*?>(.*?)</table>", txt, re.S)
     
-    result = ""
+    zip_file_url = ""
     
     # tables loop
     for table_item in items:
@@ -218,7 +226,10 @@ def get_intermediate_url(url):
       '1',
       '2014-03-25'))
     '''
-
+    if not zip_file_url:
+        print "*"*40
+        print "get_intermediate_url(): unable to find .zip in %s" % (url)
+        print "*"*40
     return zip_file_url
 
 def git(cmd):
@@ -287,10 +298,10 @@ if "__main__" == __name__:
     # regular expression �� �̿��Ͽ� ��� ���ڿ��� ã��
     found = re.findall("https://.+[/,](.+).git", txt)
     print "len(found) =", len(found)
-    #proc_proj_list(found)
-    
+    proc_proj_list(found)
+
     # to test git_sync_temp()
-    proj_id = "14cpfassangshow"
-    dest_path = r"c:\users\farak\appdata\local\temp\tmpxfau2b"
+    # proj_id = "14cpfassangshow"
+    # dest_path = r"c:\users\farak\appdata\local\temp\tmpxfau2b"
     #download_n_sync(proj_id)
-    git_sync_temp(proj_id, dest_path)
+    #git_sync_temp(proj_id, dest_path)
