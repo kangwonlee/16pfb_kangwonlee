@@ -4,6 +4,23 @@ import os
 import pprint
 import re_test as ret
 
+def proc_msg(msg):
+    '''
+    identify date within each commit
+    '''
+
+    '''
+    commit fc8fb8e9b3a5174303d3733e1646d53a3dc5f638
+    Author: naverdev <naverdev@naver.com>
+    Date:   Tue Mar 4 06:58:15 2014 +0000
+    
+        initialized Git repository    
+    '''
+    pattern_string_1 = "commit.+Author:.+Date:\s+(.*?)$.*"
+    lines = msg.split('\n')
+
+    print lines
+    
 
 def proc_name(arg, dirpath, name):
     if os.path.isfile(name):
@@ -66,3 +83,10 @@ if "__main__" == __name__:
     
     pprint.pprint (student_dict.keys())
     pprint.pprint (student_dict)
+
+    proc_msg('''commit fc8fb8e9b3a5174303d3733e1646d53a3dc5f638
+Author: naverdev <naverdev@naver.com>
+Date:   Tue Mar 4 06:58:15 2014 +0000
+
+    initialized Git repository    
+''')
