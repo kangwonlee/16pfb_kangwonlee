@@ -91,21 +91,23 @@ def get_filename(url):
     # find all tables
     items = re.findall("<table.*?>(.*?)</table>", txt, re.S)
     
+    result = ""
+    
     # tables loop
     for table_item in items:
         # if this table contains .zip string
         if ".zip" in table_item:
             # find all rows
             table_tuple = parse_table(table_item)
-            pprint.pprint(table_tuple)
             
             latest_row = table_tuple[1]
             anchor_string = latest_row[1]
-            print "get_filename(): anchor_string =%r" % (anchor_string)
             path_fname_list = re.findall(r'''<a\s.*?href="(.+?)"''', anchor_string, re.S)
-            print "get_filename(): path_fname_list =", path_fname_list
             zip_file_url = urlparse.urljoin(url, path_fname_list[0])
-            print "get_filename(): zip_file_url =", zip_file_url
+            
+            if ".zip" in zip_file_url:
+                result = zip_file_url
+                break
             
     # sample table
     '''
@@ -121,7 +123,7 @@ def get_filename(url):
       '2014-03-25'))
     '''
 
-    return "not done yet"
+    return zip_file_url
 
 def git(cmd):
     '''
