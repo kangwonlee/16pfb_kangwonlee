@@ -18,8 +18,9 @@ def proc_msg(msg):
     '''
     pattern_string_1 = "commit.+Author:.+Date:\s+(.*?)$.*"
     lines = msg.split('\n')
-
-    print lines
+    
+    for i in xrange(2, len(lines), 3):
+        print lines[i].strip()
     
 
 def proc_name(arg, dirpath, name):
