@@ -97,17 +97,35 @@ def build_table(dict):
     
     field_list = build_field_list(dict)
     
+    del dict['fields']
+    
     print field_list
     
     nFields = len(field_list)
-    
-     
 
     csv_fname = "progress.csv"
     
-    #f = open(csv_fname, 'w')
+    f = open(csv_fname, 'w')
 
-    #f.close()
+    separator = '\t'
+
+    # column title row
+    for field in field_list:
+        f.write( "%c%s"%(separator,field) )
+    f.write('\n')
+
+    # proj_id row
+    for proj_id in dict.iterkeys():
+        # write ror
+        # title column
+        f.write("%s"%proj_id)
+        for field in field_list:
+            f.write(separator)
+            if dict[proj_id].has_key(field):
+                f.write(str(dict[proj_id][field]))
+        f.write('\n')
+
+    f.close()
 
 if "__main__" == __name__:
     # read file
@@ -128,8 +146,7 @@ if "__main__" == __name__:
     '''
     
     # initialize student directory
-    student_dict = {"fields":set(),
-                    "proj_id":set()}
+    student_dict = {"fields":set()}
 
     os.path.walk(ret.repository_local_path, visit_path, student_dict)
 
