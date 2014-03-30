@@ -61,7 +61,7 @@ def download_n_sync(proj_id):
     download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
 
     # url to zip file
-    file_path = get_zip_url(download_page_url)
+    file_path = get_intermediate_url(download_page_url)
     print "download_n_sync() : file_path =", file_path
     num_zip_list = re.findall(r"download/(.*)\?filename=(.*)", file_path)
     
@@ -70,11 +70,10 @@ def download_n_sync(proj_id):
     print "download_n_sync() : num_zip_list =", num_zip_list
     print "download_n_sync() : numeric =", number
     print "download_n_sync() : zip_file_name =", zip_fname
-
-    dest_path_fname = os.path.join(dest_path, zip_fname)
     
     zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (number, zip_fname)
-    
+
+    dest_path_fname = os.path.join(dest_path, zip_fname)
     #download file
     print "download_n_sync() : retriving %s to %s" % (zip_url, dest_path_fname)
     urllib.urlretrieve(zip_url, dest_path_fname)
@@ -85,9 +84,7 @@ def download_n_sync(proj_id):
     z.extractall(dest_path)
     z.close()
     # os.rmdir(dest_path)
-    
-    
-        
+
 def parse_table(html_txt):
     '''
     content of a 2D table -> tuple of tuple
@@ -105,7 +102,7 @@ def parse_table(html_txt):
         
     return tuple(table_list)
 
-def get_zip_url(url):
+def get_intermediate_url(url):
     '''
     get .zip filename from the download page of the project
     '''
@@ -120,7 +117,7 @@ def get_zip_url(url):
     txt = f.read()
     f.close()
     del f
-    print "get_zip_url() : len(txt) =", len(txt)
+    print "get_intermediate_url() : len(txt) =", len(txt)
     
     # find all tables
     items = re.findall("<table.*?>(.*?)</table>", txt, re.S)
