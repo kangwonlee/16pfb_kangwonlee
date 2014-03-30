@@ -16,7 +16,11 @@ def visit_path(arg, dirpath, namelist):
         
         for name in namelist:
             if os.path.isfile(name):
-                ret.git('''log %s''' % name)
+                git_cmd_string = '''log %s''' % name
+                git_cmd_string2 = '''log --format="%%h %%ai" %s''' % name
+                print git_cmd_string
+                msg = ret.git(git_cmd_string, bVerbose = False)
+                print msg
         
         os.chdir(org_path)
             
