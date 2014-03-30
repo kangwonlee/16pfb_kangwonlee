@@ -48,16 +48,28 @@ def download_n_sync(proj_id):
     '''
     
     download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
-    
-    # download page string sample
-    '''
-    
-    '''
-    
+
     filename = get_filename(download_page_url)
     
-    filename = "140325PFA.zip"
     file_path = "https://dev.naver.com/projects/%s/download/9335?filename=%s" %(proj_id, filename)
+    
+def get_filename(url):
+    '''
+    get .zip filename from the download page of the project
+    '''
+    # download page string sample
+    '''
+    <table>
+        <td></td>
+        <td><a [path to file]> filename </a></td>
+    </table>
+    '''
+    f = urllib.urlopen(url)
+    txt = f.read()
+    f.close()
+    del f
+    print "get_filename() : len(txt) =", len(txt)
+    return re.findall("<table.*?>(.*?)</table>", txt, re.S)
 
 def git(cmd):
     '''
@@ -132,4 +144,8 @@ if "__main__" == __name__:
     # regular expression 을 이용하여 관심 문자열을 찾음
     found = re.findall("https://.+[/,](.+).git", txt)
     print "len(found) =", len(found)
-    proc_proj_list(found)
+    #proc_proj_list(found)
+    items = get_filename(r"http://dev.naver.com/projects/14cpfakangwon/download")
+    for item in items:
+        print item
+        print ".zip" in item
