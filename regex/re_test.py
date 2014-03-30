@@ -38,12 +38,14 @@ def proc_proj_list(found):
 # https://dev.naver.com/projects/14cpfakangwon/download/9335?filename=140325PFA.zip
 
 def get_zip_url(intermediate_zip_url):
-    print "get_zip_url() : intermediate_zip_url =", intermediate_zip_url
+    bVerbose = False
+    if bVerbose: print "get_zip_url() : intermediate_zip_url =", intermediate_zip_url
     num_zip_list = re.findall(r"download/(.*)\?filename=(.*)", intermediate_zip_url)
     number, zip_fname = num_zip_list[0]
-    print "get_zip_url() : num_zip_list =", num_zip_list
-    print "get_zip_url() : numeric =", number
-    print "get_zip_url() : zip_file_name =", zip_fname
+    if bVerbose:
+        print "get_zip_url() : num_zip_list =", num_zip_list
+        print "get_zip_url() : numeric =", number
+        print "get_zip_url() : zip_file_name =", zip_fname
     zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (number, zip_fname)
     return zip_fname, zip_url
 
@@ -52,6 +54,7 @@ def download_zipfile(proj_id, dest_path):
     '''
     download zip file of the project id
     '''
+    bVerbose = False
     # download page url
     download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
     # url to zip file
@@ -60,7 +63,7 @@ def download_zipfile(proj_id, dest_path):
     # destination path for the zip file
     dest_path_fname = os.path.join(dest_path, zip_fname)
     #download file
-    print "download_zipfile() : retriving %s to %s" % (zip_url, dest_path_fname)
+    if bVerbose: print "download_zipfile() : retriving %s to %s" % (zip_url, dest_path_fname)
     urllib.urlretrieve(zip_url, dest_path_fname)
     return dest_path_fname
 
