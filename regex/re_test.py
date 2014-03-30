@@ -2,6 +2,7 @@
 import re
 import os
 import pprint
+import tempfile # Martelli, Python in a Nutsell 2nd ed, p. 223, 2006.
 import urllib
 import urlparse
 
@@ -51,8 +52,15 @@ def download_n_sync(proj_id):
     download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
 
     file_path = get_zip_url(download_page_url)
-    print file_path
-    print re.findall("/.*?\?filename=(.*)", file_path)
+    zip_file_name = re.findall("/.*?\?filename=(.*)", file_path)[0]
+    
+    dest_path = tempfile.mkdtemp()
+    print "download_n_sync() : dest_path =", dest_path
+    dest_path_fname = os.path.join(dest_path, zip_file_name)
+    
+    urllib.urlretrieve(download_page_url, dest_path_fname)
+    
+    # os.rmdir(dest_path)
         
 def parse_table(html_txt):
     '''
