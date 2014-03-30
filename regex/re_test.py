@@ -5,6 +5,7 @@ import pprint
 import tempfile # Martelli, Python in a Nutsell 2nd ed, p. 223, 2006.
 import urllib
 import urlparse
+import zipfile  # Martelli, Python in a Nutsell 2nd ed, p. 235, 2006.
 
 git_string = r'"D:\Program Files (x86)\Git\bin\git.exe"'
 
@@ -43,7 +44,7 @@ def download_n_sync(proj_id):
     find file name (using re)
     
     download zip file to a specified path
-    https://dev.naver.com/projects/[proj id]/download/9335?filename=[file name]
+    https://dev.naver.com/projects/[proj id]/download/[????]?filename=[file name]
     
     unzip under an appropriate path
     
@@ -52,17 +53,34 @@ def download_n_sync(proj_id):
     merge with repository
     '''
     
+    # download page url
     download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
 
+    # url to zip file
     file_path = get_zip_url(download_page_url)
-    zip_file_name = re.findall("/.*?\?filename=(.*)", file_path)[0]
-    
+    print "download_n_sync() : file_path =", file_path
+    numeric_list = re.findall(r"download/(.*)\?filename=", file_path)
+    zip_file_name_list = re.findall(r"download/[0-9]*?\?filename=(.*)", file_path)
+    print "download_n_sync() : numeric =", numeric_list
+    print "download_n_sync() : zip_file_name =", zip_file_name_list
+
+    # make temporary path
+    # Martelli, Python in a Nutsell 2nd ed, p. 223, 2006.
     dest_path = tempfile.mkdtemp()
     print "download_n_sync() : dest_path =", dest_path
-    dest_path_fname = os.path.join(dest_path, zip_file_name)
+    dest_path_fname = os.path.join(dest_path, zip_file_name_list[0])
     
-    urllib.urlretrieve(download_page_url, dest_path_fname)
+    zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (numeric_list[0], zip_file_name_list[0])
     
+    #download file
+    print "download_n_sync() : retriving %s to %s" % (zip_url, dest_path_fname)
+    urllib.urlretrieve(zip_url, dest_path_fname)
+    
+    # Martelli, Python in a Nutsell 2nd ed, p. 235, 2006.
+    # create a zip file object
+    z = zipfile.ZipFile(dest_path_fname)
+    zipped_items = z.namelist()
+    pprint.pprint (zipped_items)
     # os.rmdir(dest_path)
         
 def parse_table(html_txt):
