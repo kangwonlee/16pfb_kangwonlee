@@ -4,7 +4,7 @@ import os
 import pprint
 import re_test as ret
 
-def handle_path(arg, dirpath, namelist):
+def visit_path(arg, dirpath, namelist):
     if ".git" not in dirpath:
         org_path = os.path.abspath(os.curdir)
         d_path = os.path.abspath(dirpath)
@@ -41,7 +41,7 @@ if "__main__" == __name__:
     # initialize student directory
     student_dict = {}
 
-    os.path.walk(os.curdir, handle_path, student_dict)
+    os.path.walk(os.curdir, visit_path, student_dict)
 
     os.chdir(original_path)
     
