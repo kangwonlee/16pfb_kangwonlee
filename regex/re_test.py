@@ -66,8 +66,10 @@ def download_zipfile(proj_id, dest_path):
     if intermediate_zip_url:
     
         zip_fname, zip_url = get_zip_url(intermediate_zip_url)
+        #http://stackoverflow.com/questions/2004137/unicodeencodeerror-on-joining-file-name
+        decoded_zipname = zip_fname.decode('utf-8')
         # destination path for the zip file
-        dest_path_fname = os.path.join(dest_path, zip_fname)
+        dest_path_fname = os.path.join(dest_path, decoded_zipname)
         #download file
         if bVerbose: print "download_zipfile() : retriving %s to %s" % (zip_url, dest_path_fname)
         urllib.urlretrieve(zip_url, dest_path_fname)
