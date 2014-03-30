@@ -7,6 +7,9 @@ import urllib
 import urlparse
 
 git_string = r'"D:\Program Files (x86)\Git\bin\git.exe"'
+
+repository_local_path = "data"
+
 def proc_proj_list(found):
     '''
     process project list
@@ -24,7 +27,7 @@ def proc_proj_list(found):
         # if duplicated, move to the next project id
         if (not duplicate):
             # get project path
-            path_under_data = os.path.join("data", proj_id)
+            path_under_data = os.path.join(repository_local_path, proj_id)
             # if project path already exists
             if (not os.path.exists(path_under_data)):
                 clone_naver_under_data(proj_id)
@@ -173,14 +176,14 @@ def clone_naver_under_data(proj_id):
     '''
     git clone given project under data/[project id] 
     '''
-    path = os.path.join("data", proj_id)
+    path = os.path.join(repository_local_path, proj_id)
     clone_naver_to(proj_id, path)
 
 def paths_under_data():
     '''
     return all subfolders under data/ folder
     '''
-    raw = os.listdir("data")
+    raw = os.listdir(repository_local_path)
     result_list = filter(lambda path_item: os.path.isdir(path_item), raw)
     del raw
     return result_list
