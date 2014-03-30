@@ -32,6 +32,14 @@ def proc_msg(msg):
             #print result[-1]
     return tuple(result)
 
+def proc_time_list(time_list):
+    '''
+    evaluate list of time stamps
+    '''
+    n = len(time_list)
+    
+    return n
+
 def proc_name(arg, dirpath, name):
     if os.path.isfile(name) and "README" != name:
         git_cmd_string = '''log %s''' % name
@@ -42,11 +50,13 @@ def proc_name(arg, dirpath, name):
         
         time_list = proc_msg(msg)
         
+        evaluation = proc_time_list(time_list)
+        
         key = dirpath, name
         if not arg.has_key(key):
-            arg[key] = [time_list]
+            arg[key] = [evaluation]
         else:
-            arg[key].append(time_list)
+            arg[key].append(evaluation)
 
 def visit_path(arg, dirpath, namelist):
     if ".git" not in dirpath:
