@@ -52,6 +52,10 @@ def download_n_sync(proj_id):
     
     merge with repository
     '''
+    # make temporary path
+    # Martelli, Python in a Nutsell 2nd ed, p. 223, 2006.
+    dest_path = tempfile.mkdtemp()
+    print "download_n_sync() : dest_path =", dest_path
     
     # download page url
     download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
@@ -67,10 +71,6 @@ def download_n_sync(proj_id):
     print "download_n_sync() : numeric =", number
     print "download_n_sync() : zip_file_name =", zip_fname
 
-    # make temporary path
-    # Martelli, Python in a Nutsell 2nd ed, p. 223, 2006.
-    dest_path = tempfile.mkdtemp()
-    print "download_n_sync() : dest_path =", dest_path
     dest_path_fname = os.path.join(dest_path, zip_fname)
     
     zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (number, zip_fname)
