@@ -47,6 +47,35 @@ def get_zip_url(intermediate_zip_url):
     zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (number, zip_fname)
     return zip_fname, zip_url
 
+
+def download_zipfile(proj_id, dest_path):
+    '''
+    download zip file of the project id
+    '''
+    # download page url
+    download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
+    # url to zip file
+    intermediate_zip_url = get_intermediate_url(download_page_url)
+    zip_fname, zip_url = get_zip_url(intermediate_zip_url)
+    # destination path for the zip file
+    dest_path_fname = os.path.join(dest_path, zip_fname)
+    #download file
+    print "download_n_sync() : retriving %s to %s" % (zip_url, dest_path_fname)
+    urllib.urlretrieve(zip_url, dest_path_fname)
+    return dest_path_fname
+
+
+def unpack_zip_file(dest_path, dest_path_fname):
+    '''
+    unpack everything in zip file to the destination path
+    '''
+    # extract zip file content
+    # http://stackoverflow.com/questions/9431918/extracting-zip-file-contents-to-specific-directory-in-python-2-7
+    z = zipfile.ZipFile(dest_path_fname, 'r')
+    z.extractall(dest_path)
+    z.close()
+    os.remove(dest_path_fname)
+
 def download_n_sync(proj_id):
     '''
     read project download page
@@ -68,30 +97,13 @@ def download_n_sync(proj_id):
     dest_path = tempfile.mkdtemp()
     print "download_n_sync() : dest_path =", dest_path
     
-    # download page url
-    download_page_url = "http://dev.naver.com/projects/%s/download" % (proj_id)
+    dest_path_fname = download_zipfile(proj_id, dest_path)
 
-    # url to zip file
-    intermediate_zip_url = get_intermediate_url(download_page_url)
-    zip_fname, zip_url = get_zip_url(intermediate_zip_url)
-
-    # destination path for the zip file
-    dest_path_fname = os.path.join(dest_path, zip_fname)
-    
-    #download file
-    print "download_n_sync() : retriving %s to %s" % (zip_url, dest_path_fname)
-    urllib.urlretrieve(zip_url, dest_path_fname)
-
-    # extract zip file content    
-    # http://stackoverflow.com/questions/9431918/extracting-zip-file-contents-to-specific-directory-in-python-2-7
-    z = zipfile.ZipFile(dest_path_fname, 'r')
-    z.extractall(dest_path)
-    z.close()
-    
-    os.remove(dest_path_fname)
-    # os.rmdir(dest_path)
+    unpack_zip_file(dest_path, dest_path_fname)
     
     print dest_path
+    
+    # os.rmdir(dest_path)
 
 def parse_table(html_txt):
     '''
