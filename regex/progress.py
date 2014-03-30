@@ -10,9 +10,13 @@ def visit_path(arg, dirpath, namelist):
         d_path = os.path.abspath(dirpath)
         os.chdir(d_path)
         
+        print '-'*80
+        print os.path.abspath(os.curdir)
+        print '-'*80
+        
         for name in namelist:
             if os.path.isfile(name):
-                ret.git("log %s" % name)
+                ret.git('''log %s''' % name)
         
         os.chdir(org_path)
             
