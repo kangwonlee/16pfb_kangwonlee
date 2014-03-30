@@ -45,7 +45,10 @@ def proc_name(arg, dirpath, name):
     and (name not in ("README"))\
     :
         proj_id = dirpath.split(os.sep)[1]
-        arg["fields"].add(name)
+        key1 = proj_id
+        key2 = name.lower()
+        
+        arg["fields"].add(key2)
         
         
         git_cmd_string = '''log %s''' % name
@@ -58,8 +61,6 @@ def proc_name(arg, dirpath, name):
         
         evaluation = proc_time_list(time_list)
         
-        key1 = proj_id
-        key2 = name
         #print "key =", key
         if not arg.has_key(key1):
             arg[key1] = {key2: [evaluation]}
