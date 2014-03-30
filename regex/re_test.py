@@ -36,6 +36,17 @@ def proc_proj_list(found):
                 pull_path(path_under_data)
 
 # https://dev.naver.com/projects/14cpfakangwon/download/9335?filename=140325PFA.zip
+
+def get_zip_url(intermediate_zip_url):
+    print "download_n_sync() : intermediate_zip_url =", intermediate_zip_url
+    num_zip_list = re.findall(r"download/(.*)\?filename=(.*)", intermediate_zip_url)
+    number, zip_fname = num_zip_list[0]
+    print "download_n_sync() : num_zip_list =", num_zip_list
+    print "download_n_sync() : numeric =", number
+    print "download_n_sync() : zip_file_name =", zip_fname
+    zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (number, zip_fname)
+    return zip_fname, zip_url
+
 def download_n_sync(proj_id):
     '''
     read project download page
@@ -62,18 +73,11 @@ def download_n_sync(proj_id):
 
     # url to zip file
     intermediate_zip_url = get_intermediate_url(download_page_url)
-    print "download_n_sync() : intermediate_zip_url =", intermediate_zip_url
-    num_zip_list = re.findall(r"download/(.*)\?filename=(.*)", intermediate_zip_url)
-    
-    number, zip_fname = num_zip_list[0] 
-    
-    print "download_n_sync() : num_zip_list =", num_zip_list
-    print "download_n_sync() : numeric =", number
-    print "download_n_sync() : zip_file_name =", zip_fname
-    
-    zip_url = "http://dev.naver.com/frs/download.php/%s/%s" % (number, zip_fname)
+    zip_fname, zip_url = get_zip_url(intermediate_zip_url)
 
+    # destination path for the zip file
     dest_path_fname = os.path.join(dest_path, zip_fname)
+    
     #download file
     print "download_n_sync() : retriving %s to %s" % (zip_url, dest_path_fname)
     urllib.urlretrieve(zip_url, dest_path_fname)
