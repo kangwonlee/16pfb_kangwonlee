@@ -102,12 +102,22 @@ def git_sync_temp(proj_id, dest_path):
     # store original path
     original_path = os.path.abspath(os.curdir)
     
-    repo_path = get_local_repo_path(proj_id) 
+    # change path to project repository
+    repo_path = get_local_repo_path(proj_id)
+    os.chdir(repo_path)
     
-    # remote command string
-    remote_string = "remote add other %s" % (dest_path)
+    dest_path_list = os.listdir(dest_path)
+    other_repo_path = os.path.join(dest_path, dest_path_list[0])
+
+    # configure other remote repository    
+    remote_string = "remote add other %s" % (other_repo_path)
     print "download_n_sync() :", remote_string
     git(remote_string)
+
+    # execute pull
+    git("fetch other")
+    git("checkout master")
+    git("rebase other/master")
 
     # change back to original path
     os.chdir(original_path)
