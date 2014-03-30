@@ -87,7 +87,11 @@ def download_n_sync(proj_id):
     z = zipfile.ZipFile(dest_path_fname, 'r')
     z.extractall(dest_path)
     z.close()
+    
+    os.remove(dest_path_fname)
     # os.rmdir(dest_path)
+    
+    print dest_path
 
 def parse_table(html_txt):
     '''
