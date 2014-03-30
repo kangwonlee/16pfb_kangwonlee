@@ -125,7 +125,7 @@ def git_sync_temp(proj_id, dest_path):
     # execute pull
     git("fetch other")
     git("checkout master")
-    git("rebase other/master")
+    git("merge other/master")
 
     # change back to original path
     os.chdir(original_path)
