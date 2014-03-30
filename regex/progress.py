@@ -4,6 +4,20 @@ import os
 import pprint
 import re_test as ret
 
+
+def proc_name(arg, dirpath, name):
+    if os.path.isfile(name):
+        git_cmd_string = '''log %s''' % name
+        print git_cmd_string
+        msg = ret.git(git_cmd_string, bVerbose=False)
+        print "len(msg) =", len(msg)
+        print msg
+        key = dirpath, name
+        if not arg.has_key(key):
+            arg[key] = [msg]
+        else:
+            arg[key].append(msg)
+
 def visit_path(arg, dirpath, namelist):
     if ".git" not in dirpath:
         org_path = os.path.abspath(os.curdir)
@@ -15,18 +29,7 @@ def visit_path(arg, dirpath, namelist):
         print '-'*80
         
         for name in namelist:
-            if os.path.isfile(name):
-                git_cmd_string = '''log %s''' % name
-                print git_cmd_string
-                msg = ret.git(git_cmd_string, bVerbose = False)
-                print "len(msg) =", len(msg)
-                print msg
-                
-                key = (dirpath, name)
-                if not arg.has_key(key):
-                    arg[key] = [msg]
-                else:
-                    arg[key].append(msg)
+            proc_name(arg, dirpath, name)
 
         os.chdir(org_path)
             
