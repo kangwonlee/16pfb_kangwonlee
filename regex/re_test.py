@@ -99,6 +99,14 @@ def get_filename(url):
             table_tuple = parse_table(table_item)
             pprint.pprint(table_tuple)
             
+            latest_row = table_tuple[1]
+            anchor_string = latest_row[1]
+            print "get_filename(): anchor_string =%r" % (anchor_string)
+            path_fname_list = re.findall(r'''<a\s.*?href="(.+?)"''', anchor_string, re.S)
+            print "get_filename(): path_fname_list =", path_fname_list
+            zip_file_url = urlparse.urljoin(url, path_fname_list[0])
+            print "get_filename(): zip_file_url =", zip_file_url
+            
     # sample table
     '''
     (('\xeb\xa6\xb4\xeb\xa6\xac\xec\xa6\x88 \xec\x9d\xb4\xeb\xa6\x84',
@@ -111,7 +119,7 @@ def get_filename(url):
       '71 KB',
       '1',
       '2014-03-25'))
-    '''    
+    '''
 
     return "not done yet"
 
