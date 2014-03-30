@@ -21,6 +21,12 @@ def visit_path(arg, dirpath, namelist):
                 msg = ret.git(git_cmd_string, bVerbose = False)
                 print "len(msg) =", len(msg)
                 print msg
+                
+                key = (dirpath, name)
+                if not arg.has_key(key):
+                    arg[key] = [msg]
+                else:
+                    arg[key].append(msg)
 
         os.chdir(org_path)
             
@@ -55,3 +61,5 @@ if "__main__" == __name__:
 
     os.chdir(original_path)
     
+    pprint.pprint (student_dict.keys())
+    pprint.pprint (student_dict)
