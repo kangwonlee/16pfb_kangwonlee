@@ -103,7 +103,7 @@ def build_table(dict):
     
     nFields = len(field_list)
 
-    csv_fname = "progress.csv"
+    csv_fname = "progress.txt"
     
     f = open(csv_fname, 'w')
 
