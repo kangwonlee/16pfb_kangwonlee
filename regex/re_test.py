@@ -42,7 +42,7 @@ def proc_proj_list(found):
                 clone_naver_to(proj_id, path_under_data)
             else:
                 pull_path(path_under_data)
-            download_n_sync(proj_id)
+            #download_n_sync(proj_id)
 
 # https://dev.naver.com/projects/14cpfakangwon/download/9335?filename=140325PFA.zip
 
