@@ -2,7 +2,7 @@
 # [분반] [학번] [이름]
 # ref : http://learnpythonthehardway.org/book/ex11.html
 
-print "How young are you?(in year)"
+print "How young are you?(in year)",
 age_yr = raw_input()
 print "How tall are you?(in cm)",
 height_cm = raw_input()
