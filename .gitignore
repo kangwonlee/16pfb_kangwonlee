@@ -1,2 +1,4 @@
 myfile.html
 myfile2.jpg
+*.pyc
+regex/data/
