@@ -2,6 +2,12 @@
 # [분반] [학번] [이름]
 # ref : http://learnpythonthehardway.org/book/ex12.html
 
+age_yr = raw_input("How young are you? (in yr)")
+height_cm = raw_input("How tall are you? (in cm)")
+weight_kg = raw_input("How much do you weight? (in kg)")
+
+print "So, you're %r old, %r tall and %r heavy." % (
+    age_yr, height_cm, weight_kg)
  
 # 여기까지 입력 후 add, commit
 
