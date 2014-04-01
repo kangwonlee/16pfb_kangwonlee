@@ -5,6 +5,7 @@
 tabby_cat = "\tI'm tabbed in."
 persian_cat = "I'm split\non a line."
 backslash_cat = "I'm \\\\ a \\\ cat."
+lazy_cat = r"I'm \\ a \\ cat."
 
 fat_cat = '''
 I'll do a list:
@@ -16,6 +17,7 @@ I'll do a list:
 print tabby_cat
 print persian_cat
 print backslash_cat
+print lazy_cat
 print fat_cat
  
 # 여기까지 입력 후 add, commit
