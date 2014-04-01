@@ -1,6 +1,6 @@
 # -*- coding: cp949 -*-
 # [분반] [학번] [이름]
-# ref : http://learnpythonthehardway.org/book/ex10.html
+# ref : http://learnpythonthehardway.org/book/ex11.html
 
  
 # 여기까지 입력 후 add, commit
