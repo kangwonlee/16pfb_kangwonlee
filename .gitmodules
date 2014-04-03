@@ -1,0 +1,3 @@
+[submodule "student_repository/tool"]
+	path = student_repository/tool
+	url = https://kangwon_fwd@dev.naver.com/git/reposetman.git
