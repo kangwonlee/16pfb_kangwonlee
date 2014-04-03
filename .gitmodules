@@ -1,3 +1,9 @@
 [submodule "student_repository/tool"]
 	path = student_repository/tool
 	url = https://kangwon_fwd@dev.naver.com/git/reposetman.git
+[submodule "student_repository/data/14cpfahusti519"]
+	path = student_repository/data/14cpfahusti519
+	url = https://nobody:nobody@dev.naver.com/git/14cpfahusti519.git
+[submodule "student_repository/data/puppyj1234"]
+	path = student_repository/data/puppyj1234
+	url = https://nobody:nobody@dev.naver.com/git/puppyj1234.git
