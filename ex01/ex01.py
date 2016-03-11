@@ -5,3 +5,7 @@ print("This is fun.")
 print('Yay! Printing.')
 print("I'd much rather you 'not'.")
 print('I "said" do not touch this.')
+
+print("Kangwon Lee")
+print("16 03 11 15:11")
+print("Se Dol Lee : AlphaGo = 0:2")
