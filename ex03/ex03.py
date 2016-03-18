@@ -1,3 +1,5 @@
+# -*- coding: cp949 -*-
+# 닭의 수를 표시할 것임을 알림
 print "I will now count my chickens:"
 
 print "Hens", 25 + 30 / 6
