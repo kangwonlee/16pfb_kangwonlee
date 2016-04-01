@@ -1,3 +1,5 @@
+# -*- coding: cp949 -*-
+# http://learnpythonthehardway.org/book/ex6.html
 x = "There are %d types of people." % 10
 binary = "binary"
 do_not = "don't"
