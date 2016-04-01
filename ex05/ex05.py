@@ -1,4 +1,4 @@
-my_name = 'Kangwon Lee'
+name = 'Kangwon Lee'
 my_age = 25  # a lie
 my_height_cm = 184
 my_weight_kg = 80
@@ -6,7 +6,7 @@ my_eyes = 'Brown'
 my_teeth = 'White'
 my_hair = 'Black'
 
-print "Let's talk about %s." % my_name
+print "Let's talk about %s." % name
 print "He's %d cm tall." % my_height_cm
 print "He's %d kg heavy." % my_weight_kg
 print "Actually that's not too heavy."
