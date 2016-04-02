@@ -1,0 +1,1 @@
+160402 10:26 예제 8 formatter % (formatter,) * 4 한줄 빼먹음
