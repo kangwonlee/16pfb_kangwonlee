@@ -1,6 +1,6 @@
 # http://learnpythonthehardway.org/book/ex16.html
 from sys import argv
-
+print("argv = " + str(argv))
 script, filename = argv
 
 print("We're going to erase %r." % filename)
