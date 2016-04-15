@@ -8,6 +8,7 @@ print("If you don't want that, hit CTRL+C (^C).")
 print("If you do want that, hit RETURN.")
 
 raw_input("?")
+# python 3 : input("?")
 
 print("Opening the file...")
 target = open(filename, 'w')
