@@ -2,7 +2,8 @@
 from sys import argv
 print("argv = " + str(argv))
 script, filename = argv
-
+# TODO : Korean Code & Escape Sequence
+#  First line encoding {utf8, cp949} x File encoding {utf8, 949} combinations
 print("We're going to erase %r." % filename)
 print("If you don't want that, hit CTRL+C (^C).")
 print("If you do want that, hit RETURN.")
