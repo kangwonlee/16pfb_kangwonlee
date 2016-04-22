@@ -1,3 +1,4 @@
+# -*-coding:utf8
 from sys import argv
 
 script, input_file = argv
