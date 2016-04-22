@@ -13,17 +13,17 @@ print(" 9. 'test' == 'testing' = %s" % 'test' == 'testing')
 print("10. 1!=0 and 2==1 = %s" % (1 != 0) and (2 == 1))
 print("11. 'test'!='testing' = %s" % 'test' != 'testing')
 print("12. 'test'==1 = %s" % 'test' == 1)
-print("13. not(True and False) = {:b}".format(not (True and False)))
-print("14. not(1==1 and 0!=1) = {:b}".format(not ((1 == 1) and (0 != 1))))
-print("15. not(10==1 or 1000==1000) = {:b}".format(not ((10 == 1) or (1000 == 1000))))
-print("16. not(1!=10 or 3==4) = {:b}".format(not ((1 != 10) or (3 == 4))))
-print("17. not('testing'=='testing' and 'Zed'=='Cool Guy') = {:b}".format(
+print("13. not(True and False) = %s" % (not (True and False)))
+print("14. not(1==1 and 0!=1) = %s" % (not ((1 == 1) and (0 != 1))))
+print("15. not(10==1 or 1000==1000) = %s " % (not ((10 == 1) or (1000 == 1000))))
+print("16. not(1!=10 or 3==4) = %s" % (not ((1 != 10) or (3 == 4))))
+print("17. not('testing'=='testing' and 'Zed'=='Cool Guy') = %s " % (
     not (('testing' == 'testing') and ('Zed' == 'Cool Guy'))))
-print("18. 1==1 and not('testing'==1 or 1==0) = {:b}".format(
+print("18. 1==1 and not('testing'==1 or 1==0) = %s" % (
     (1 == 1) and not (('testing' == 1) or (1 == 0))))
-print("19. 'chunky'=='bacon' and not (3==4 or 3==3) = {:b}".format(
+print("19. 'chunky'=='bacon' and not (3==4 or 3==3) = %s" % (
     ('chunky' == 'bacon') and not ((3 == 4) or (3 == 3))))
-print("20. 3==3 and not('testing'=='testing' or 'Python'=='Fun') = {:b}".format(
+print("20. 3==3 and not('testing'=='testing' or 'Python'=='Fun') = %s" % (
     (3 == 3) and not (('testing' == 'testing') or ('Python' == 'Fun'))))
 
 print("extra 1. 'test' and 'test' = = %s" % 'test' and 'test')
@@ -37,7 +37,4 @@ print("extra 4. True and 1 = = %s" % True and 1)
 
 # 각자 Study drills 시도 후 필요시 commit
 
-# 열린게시판 / 오류노트 에 각자 오류노트 작성
-
-# 시험 문제로 만나면 곤란할 것 같은 내용은 질의응답 난에 각자 질문
-# (공개 질문 추천)
+# 오류노트 에 각자 오류노트 작성
