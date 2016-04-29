@@ -1,4 +1,6 @@
 # -*-coding:utf8
+# 참고문헌: http://learnpythonthehardway.org/book/ex24.html
+
 print("Let's practice everything.")
 print('You\'d need to know \'bout escapes with \\ that do \n newlines and \t tabs.')
 
@@ -36,3 +38,11 @@ start_point = start_point / 10
 
 print("We can also do that this way:")
 print("We'd have %d beans, %d jars, and %d crates." % secret_formula(start_point))
+
+# 여기까지 입력 후 add, commit
+
+# 각 행 주석 입력 후 commit
+
+# 각자 Study drills 시도 후 필요시 commit
+
+# 오류노트 에 각자 오류노트 작성
