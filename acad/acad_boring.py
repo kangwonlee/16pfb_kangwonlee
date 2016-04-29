@@ -20,6 +20,7 @@ def hollow_axle(outer_diameter_mm, inner_diameters_mm, stage_lengths_mm):
         write_upper_section(f, upper_coordinates_mm)
         hatch_upper(f, upper_coordinates_mm)
         write_upper_section(f, lower_coordinates_mm)
+        hatch_lower(f, lower_coordinates_mm)
         f.write('zoom e\n')
         f.close()
 
@@ -36,6 +37,12 @@ def write_upper_section(f, upper_coordinates_mm):
 def hatch_upper(f, upper_coordinates_mm):
     f.write('-Hatch ')
     f.write('%g,%g ' % (upper_coordinates_mm[0][0] - 1, upper_coordinates_mm[0][1] - 1))
+    f.write('\n')
+
+
+def hatch_lower(f, upper_coordinates_mm):
+    f.write('-Hatch ')
+    f.write('%g,%g ' % (upper_coordinates_mm[0][0] - 1, upper_coordinates_mm[0][1] + 1))
     f.write('\n')
 
 
