@@ -8,21 +8,21 @@ print("You enter a dark room with two doors.  Do you go through door #1 or door 
 
 door = raw_input("> ")
 
-if door == "1":
+if "1" == door:
     print("There's a giant bear here eating a cheese cake.  What do you do?")
     print("1. Take the cake.")
     print("2. Scream at the bear.")
 
     bear = raw_input("> ")
 
-    if bear == "1":
+    if "1" == bear:
         print("The bear eats your face off.  Good job!")
-    elif bear == "2":
+    elif "2" == bear:
         print("The bear eats your legs off.  Good job!")
     else:
         print("Well, doing %s is probably better.  Bear runs away." % bear)
 
-elif door == "2":
+elif "2" == door:
     print("You stare into the endless abyss at Cthulhu's retina.")
     print("1. Blueberries.")
     print("2. Yellow jacket clothespins.")
@@ -30,7 +30,7 @@ elif door == "2":
 
     insanity = raw_input("> ")
 
-    if insanity == "1" or insanity == "2":
+    if "1" == insanity or "2" == insanity:
         print("Your body survives powered by a mind of jello.  Good job!")
     else:
         print("The insanity rots your eyes into a pool of muck.  Good job!")
