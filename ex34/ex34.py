@@ -7,10 +7,10 @@ tiger = animals[1]
 penguin = animals[2]
 zebra = animals[3]
 
-print "bear =", bear
-print "tiger =", tiger
-print "penguin =", penguin
-print "zebra =", zebra
+print("bear = %s" % bear)
+print("tiger = %s" % tiger)
+print("penguin = %s" % penguin)
+print("zebra = %s" % zebra)
 
 # 여기까지 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
