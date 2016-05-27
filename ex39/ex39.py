@@ -12,7 +12,7 @@ states = {
 
 # create a basic set of states and some cities in them
 cities = {
-    'CA': 'San Francisco',
+    'CA': 'Los Angeles',
     'HI': 'Honolulu',
     'FL': 'Jacksonville',
 }
@@ -46,7 +46,7 @@ for abbrev, city in cities.items():
 
 # now do both at the same time
 print('-' * 10)
-for state, abbrev in states.item():
+for state, abbrev in states.items():
     print("%s state is abbreviated %s and has city %s" % (
         state, abbrev, cities[abbrev]
     ))
