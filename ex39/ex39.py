@@ -44,6 +44,13 @@ print('-' * 10)
 for abbrev, city in cities.items():
     print("%s has the city %s" % (abbrev, city))
 
+# now do both at the same time
+print('-' * 10)
+for state, abbrev in states.item():
+    print("%s state is abbreviated %s and has city %s" % (
+        state, abbrev, cities[abbrev]
+    ))
+
 
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
