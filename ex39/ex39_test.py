@@ -40,6 +40,10 @@ print('Florida has: %s' % hashmap.get(cities, hashmap.get(states, 'Florida')))
 print('-' * 10)
 hashmap.list(states)
 
+# print every city in state
+print('-' * 10)
+hashmap.list(cities)
+
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
 # 각자 Study drills 시도 후 필요시 commit
