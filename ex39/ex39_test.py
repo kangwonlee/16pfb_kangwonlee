@@ -1,6 +1,15 @@
 # -*-coding:utf8
 # http://learnpythonthehardway.org/book/ex39.html
 # http://eclass.kpu.ac.kr/ilos/pf/course/lecture_material_view_form.acl?ARTL_NUM=373489&SCH_KEY=&SCH_VALUE=&display=10&start=1
+import hashmap
+
+# create a mapping fo states to abbreviation
+states = hashmap.new()
+hashmap.set(states, 'Oregon', 'OR')
+hashmap.set(states, 'Florida', 'FL')
+hashmap.set(states, 'California', 'CA')
+hashmap.set(states, 'New York', 'NY')
+hashmap.set(states, 'Hawaii', 'HI')
 
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
