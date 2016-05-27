@@ -18,6 +18,7 @@ else:
 
 print(factorial(5))
 """
+import sys
 
 
 def fibonacci(n):
@@ -35,6 +36,13 @@ def main():
     for i in range(1, 10 + 1):
         print("Fibonacci(%d) = %d" % (i, fibonacci(i)))
 
+    i = 11
+    while True:
+        f = fibonacci(i)
+        if f > 4000000:
+            print("Fibonacci(%d) = %d" % (i, f))
+            sys.exit()
+        i += 1
 
 if __name__ == '__main__':
     main()
