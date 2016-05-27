@@ -15,6 +15,16 @@ def new(num_buckets=256):
     return aMap
 
 
+def hash_key(aMap, key):
+    """
+    Given a key this will create a number and then convert it to an index for the aMap's buckets.
+    :param aMap:
+    :param key:
+    :return:
+    """
+    return hash(key) % len(aMap)
+
+
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
 # 각자 Study drills 시도 후 필요시 commit
