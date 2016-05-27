@@ -36,6 +36,25 @@ def get_bucket(aMap, key):
     return aMap[bucket_id]
 
 
+def get_slot(aMap, key, default=None):
+    """
+    Returns the index, key, and value of a slot found in a bucket.
+    Returns -1, key, and default (None if not set) when not found.
+    :param aMap:
+    :param key:
+    :param default:
+    :return:
+    """
+    bucket = get_bucket(aMap, key)
+
+    for i, kv in enumerate(bucket):
+        k, v = kv
+        if key == k:
+            return i, k, v
+
+    return -1, key, default
+
+
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
 # 각자 Study drills 시도 후 필요시 commit
