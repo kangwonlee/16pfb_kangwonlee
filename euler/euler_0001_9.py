@@ -19,4 +19,16 @@ else:
 print(factorial(5))
 """
 
+
+def fibonacci(n):
+    if 2 == n:
+        return 2
+    elif 1 == n:
+        return 1
+    elif 0 >= n:
+        return 0
+    else:
+        return fibonacci(n - 2) + fibonacci(n - 1)
+
+
 # 여기까지 입력 후 add, commit  # 각 행 주석 입력 후 commit
