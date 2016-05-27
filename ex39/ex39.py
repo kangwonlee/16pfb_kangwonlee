@@ -21,6 +21,11 @@ cities = {
 cities['NY'] = 'New York'
 cities['OR'] = 'Portland'
 
+# print out some cities
+print('-' * 10)
+print('NY State has: %s' % cities['NY'])
+print('OR State has: %s' % cities['OR'])
+
 
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
