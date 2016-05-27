@@ -51,7 +51,19 @@ for state, abbrev in states.item():
         state, abbrev, cities[abbrev]
     ))
 
+print('-' * 10)
+# safely get an abbreviation by state that might not be there
+state = states.get('Texas')
+
+if not state:
+    print("Sorry, no Texas.")
+
+# get a city with a default value
+city = cities.get('TX', 'Not Entered Yet')
+print("The city for the state 'TX' is: %s" % city)
 
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
-# 각자 Study drills 시도 후 필요시 commit  # 오류노트 에 각자 오류노트 작성
+# 각자 Study drills 시도 후 필요시 commit
+
+#  오류노트 에 각자 오류노트 작성
