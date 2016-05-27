@@ -31,4 +31,13 @@ def fibonacci(n):
         return fibonacci(n - 2) + fibonacci(n - 1)
 
 
+def main():
+    for i in range(1, 10 + 1):
+        print("Fibonacci(%d) = %d" % (i, fibonacci(i)))
+
+
+if __name__ == '__main__':
+    main()
+
+
 # 여기까지 입력 후 add, commit  # 각 행 주석 입력 후 commit
