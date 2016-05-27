@@ -55,6 +55,18 @@ def get_slot(aMap, key, default=None):
     return -1, key, default
 
 
+def get(aMap, key, default=None):
+    """
+    Gets the value in a bucket for the given key, or the default.
+    :param aMap:
+    :param key:
+    :param default:
+    :return:
+    """
+    i, k, v = get_slot(aMap, key, default=default)
+    return v
+
+
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
 # 각자 Study drills 시도 후 필요시 commit
