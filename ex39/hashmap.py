@@ -25,6 +25,17 @@ def hash_key(aMap, key):
     return hash(key) % len(aMap)
 
 
+def get_bucket(aMap, key):
+    """
+    Given a key, find the bucket where it would go.
+    :param aMap:
+    :param key:
+    :return:
+    """
+    bucket_id = hash_key(aMap, key)
+    return aMap[bucket_id]
+
+
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
 # 각자 Study drills 시도 후 필요시 commit
