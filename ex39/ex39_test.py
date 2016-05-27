@@ -21,6 +21,15 @@ hashmap.set(cities, 'FL', 'Orlando')
 hashmap.set(cities, 'NY', 'New York')
 hashmap.set(cities, 'OR', 'Portland')
 
+# print out some cities
+print('-' * 10)
+print("NY State has: %s" % hashmap.get(cities, 'NY'))
+print("HI State has: %s" % hashmap.get(cities, 'HI'))
+
+# print some states
+print('-' * 10)
+print("Hawaii's abbreviation is: %s" % hashmap.get(states, 'Hawaii'))
+print("Florida's abbreviation is: %s" % hashmap.get(states, 'Florida'))
 
 # 입력 후 add, commit  # 각 행 주석 입력 후 commit
 
