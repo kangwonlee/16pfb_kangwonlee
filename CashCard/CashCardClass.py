@@ -44,6 +44,7 @@ class SimpleCashCard:
 
 # SimpleCashCard 클래스 정의 끝
 
+# 아래의 내용은 이 .py 파일이 import 될 때는 실행되지 않음
 if '__main__' == __name__:
     # 모듈 실습 함수를 하나 사용할 수 있게 함
     from CashCard_user import chk_bal
