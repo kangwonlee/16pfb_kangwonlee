@@ -22,3 +22,13 @@ class SimpleCashCard:
         print("SimpleCashCard deposit()")  # 함수 호출 표식
         # 입금하면 잔고가 증가한다
         self.balance_won += amount_won
+
+    def withdraw(self, amount_won):
+        """
+        출금
+        :param amount_won: 출금액수
+        :return:
+        """
+        print("SimpleCashCard withdraw()")  # 함수 호출 표식
+        # 출금하면 잔고가 감소한다
+        self.balance_won += (-amount_won)
