@@ -58,3 +58,12 @@ if '__main__' == __name__:
     # myCard 에서 1000원 출금
     myCard.withdraw(1000)
     chk_bal("출금 후 잔고 확인", myCard)
+
+    # 여러 장의 카드를 만들 수 있는지 알아보자
+    # 두번째 카드를 만든다
+    mySistersCard = SimpleCashCard()
+    chk_bal("잔액 확인 myCard", myCard)
+    chk_bal("잔액 확인 mySistersCard", mySistersCard)
+
+    print('myCard : %s' % myCard)
+    print('mySistersCard : %s' % mySistersCard)
