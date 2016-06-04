@@ -2,6 +2,9 @@
 # http://learnpythonthehardway.org/book/ex40.html
 # 각 행 주석 입력
 
+mystuff = {'apple': "I AM APPLES!"}
+print(mystuff['apple'])
+
 # 입력 후 add, commit
 
 # 각자 Study drills 시도 후 필요시 commit
