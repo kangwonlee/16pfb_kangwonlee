@@ -15,7 +15,7 @@ def chk_bal(message, account):
 
 
 # 현금 카드 모듈의 잔액 확인
-chk_bal("CashCard_module 잔액확인".CashCard_module)
+chk_bal("CashCard_module 잔액확인", CashCard_module)
 # 현금 카드에 10000원 입금
 print("10000원 입금")
 
@@ -26,3 +26,12 @@ CashCard_module.deposit(10000)
 # CashCard.py 모듈 안의 check_balance() 함수를 호출
 #   CashCard.py 모듈 안의 balance_won 값을 반환
 chk_bal("입금 후 잔고 확인", CashCard_module)
+
+print("1000원 출금")
+# CashCard.py 모듈 안의 withdraw() 함수를 호출
+# CashCard.py 모듈의 balance_won 값이 감소
+CashCard_module.withdraw(1000)
+
+# Cash Card 모듈 안의 check_balance() 함수롤 호출
+#   CashCard.py 모듈 안의 balance_won 값을 반환
+chk_bal("출금 후 잔고 확인", CashCard_module)
