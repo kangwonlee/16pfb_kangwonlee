@@ -35,3 +35,14 @@ CashCard_module.withdraw(1000)
 # Cash Card 모듈 안의 check_balance() 함수롤 호출
 #   CashCard.py 모듈 안의 balance_won 값을 반환
 chk_bal("출금 후 잔고 확인", CashCard_module)
+
+# 또 다른 현금 카드를 만들 수 있을까? 불러 들임
+# noinspection PyPep8
+import CashCard as mySistersCard_module
+
+chk_bal("CashCard_module 잔액 확인", CashCard_module)
+chk_bal("mySistersCard_module 잔액 확인", mySistersCard_module)
+
+# 그러나 이런 식으로는 한 장의 카드만 만들 수 있다
+print("CashCard_module : %s" % CashCard_module)
+print("mySistersCard_module : %s" % mySistersCard_module)
