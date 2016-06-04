@@ -10,6 +10,21 @@ import mystuff_module
 mystuff_module.apple()
 print(mystuff_module.tangerine)
 
+
+class MyStuff(object):
+    def __init__(self):
+        self.tangerine = "And now a thousand years between"
+
+    def apple(self):
+        print("I AM CLASSY APPLES!")
+        # end class MyStuff
+
+
+thing = MyStuff()
+thing.apple()
+print(thing.tangerine)
+
+
 # 입력 후 add, commit
 
 # 각자 Study drills 시도 후 필요시 commit
