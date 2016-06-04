@@ -33,3 +33,19 @@ class SafeCashCard(CashCard):
             print("인출되지 않았습니다")
 
 # SafeCashCard 클래스 정의 끝
+
+# 아래의 내용은 이 파일이 import 될 때는 실행되지 않음
+if '__main__' == __name__:
+    # 모듈 실습 함수를 하나 사용할 수 있게 함
+    from CashCard_user import chk_bal
+
+    # myCard 객체를 생성한다
+    #   SimpleCashCard 클래스에 정한 대로 만든다
+    #   SimpleCashCard __init__() 메소드가 호출된다
+    myCard = CashCard()
+    # mySafeCard 객체를 생성한다
+    #   SafeCashCard 클래스에 정한 대로 만든다
+    #   SafeCashCard __init__() 메소드를 호출하려고 하지만
+    #   SafeCashCard 클래스 안에는 정의되지 않았기 때문에
+    #   상위 클래스인 SimpleCashCard __init__() 메소드가 호출된다
+    mySafeCard = SafeCashCard()
