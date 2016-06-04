@@ -68,3 +68,17 @@ if '__main__' == __name__:
     #   SafeCashCard check_balance() 메소드를 호출하려고 하지만
     #   SafeCashCard 클래스 안에는 정의되지 않았기 때문에
     #   상위 클래스인 SimpleCashCard 의 check_balance() 메소드가 호출된다
+
+    # 십만원 출금
+    #   SimpleCashCard 클래스의 withdraw() 메소드가 호출된다
+    myCard.withdraw(100000)
+    #   SafeCashCard 클래스의 withdraw() 메소드가 호출된다
+    mySafeCard.withdraw(100000)
+    mySistersSafeCard.withdraw(100000)
+
+    chk_bal("myCard 출금 후 잔고 확인", myCard)
+    chk_bal("mySafeCard 출금 후 잔고 확인", mySafeCard)
+    chk_bal("mySistersSafeCard 출금 후 잔고 확인", mySistersSafeCard)
+    #   SafeCashCard check_balance() 메소드를 호출하려고 하지만
+    #   SafeCashCard 클래스 안에는 정의되지 않았기 때문에
+    #   상위 클래스인 SimpleCashCard 의 check_balance() 메소드가 호출된다
