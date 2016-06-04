@@ -32,3 +32,14 @@ class SimpleCashCard:
         print("SimpleCashCard withdraw()")  # 함수 호출 표식
         # 출금하면 잔고가 감소한다
         self.balance_won += (-amount_won)
+
+    def check_balance(self):
+        """
+        잔고조회
+        :return:
+        """
+        print("SimpleCashCard check_balance()")  # 함수 호출 표식
+        # 통장 잔고를 반환한다
+        return self.balance_won
+
+# SimpleCashCard 클래스 정의 끝
