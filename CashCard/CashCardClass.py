@@ -43,3 +43,14 @@ class SimpleCashCard:
         return self.balance_won
 
 # SimpleCashCard 클래스 정의 끝
+
+if '__main__' == __name__:
+    # 모듈 실습 함수를 하나 사용할 수 있게 함
+    from CashCard_user import chk_bal
+
+    # myCard 객체를 SimpleCashCard 클래스에 정한 대로 만듦
+    myCard = SimpleCashCard()
+
+    # myCard 에 10000원 입금
+    myCard.deposit(10000)
+    chk_bal("입금 후 잔고 확인", myCard)
