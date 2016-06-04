@@ -22,3 +22,7 @@ print("10000원 입금")
 # CashCard.py 모듈 안의 deposit() 함수를 호출
 # CashCard.py 모듈 안의 balance_won 값이 증가
 CashCard_module.deposit(10000)
+
+# CashCard.py 모듈 안의 check_balance() 함수를 호출
+#   CashCard.py 모듈 안의 balance_won 값을 반환
+chk_bal("입금 후 잔고 확인", CashCard_module)
