@@ -54,3 +54,7 @@ if '__main__' == __name__:
     # myCard 에 10000원 입금
     myCard.deposit(10000)
     chk_bal("입금 후 잔고 확인", myCard)
+
+    # myCard 에서 1000원 출금
+    myCard.withdraw(1000)
+    chk_bal("출금 후 잔고 확인", myCard)
