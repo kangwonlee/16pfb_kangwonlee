@@ -49,3 +49,15 @@ if '__main__' == __name__:
     #   SafeCashCard 클래스 안에는 정의되지 않았기 때문에
     #   상위 클래스인 SimpleCashCard __init__() 메소드가 호출된다
     mySafeCard = SafeCashCard()
+
+    # 여러장의 카드를 생성할 수 있는지 확인하기 위해 객체를 하나 더
+    mySistersSafeCard = SafeCashCard()
+
+    # 카드에 각각 만원씩 입금
+    #   SimpleCashCard 클래스의 deposit() 메소드가 호출된다
+    myCard.deposit(10000)
+    #   SafeCashCard deposit() 메소드를 호출하려고 하지만
+    #   SafeCashCard 클래스 안에는 정의되지 않았기 때문에
+    #   상위 클래스인 SimpleCashCard 의 deposit() 메소드가 호출된다
+    mySafeCard.deposit(10000)
+    mySistersSafeCard.deposit(200000)
