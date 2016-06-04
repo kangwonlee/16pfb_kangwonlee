@@ -61,3 +61,10 @@ if '__main__' == __name__:
     #   상위 클래스인 SimpleCashCard 의 deposit() 메소드가 호출된다
     mySafeCard.deposit(10000)
     mySistersSafeCard.deposit(200000)
+
+    chk_bal("myCard 입금 후 잔고 확인", myCard)
+    chk_bal("mySafeCard 입금 후 잔고 확인", mySafeCard)
+    chk_bal("mySistersSafeCard 입금 후 잔고 확인", mySistersSafeCard)
+    #   SafeCashCard check_balance() 메소드를 호출하려고 하지만
+    #   SafeCashCard 클래스 안에는 정의되지 않았기 때문에
+    #   상위 클래스인 SimpleCashCard 의 check_balance() 메소드가 호출된다
