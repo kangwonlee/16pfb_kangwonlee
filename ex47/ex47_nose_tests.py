@@ -3,6 +3,9 @@
 # 각 행 주석 입력
 
 from nose.tools import *
+# http://nose.readthedocs.io/en/latest/usage.html
+# to run nose.main()
+import nose
 
 from game import Room
 
@@ -38,6 +41,10 @@ def test_map():
     assert_equal(start.go('west'), west)
     assert_equal(start.go('west').go('east'), start)
     assert_equal(start.go('down').go('up'), start)
+
+if __name__ == '__main__':
+    # http://nose.readthedocs.io/en/latest/usage.html
+    nose.main()
 
 # 입력 후 add, commit
 
